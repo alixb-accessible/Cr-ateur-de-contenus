@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suite Complète de Création de Contenu</title>
+    
+    <!-- Toolbar d'accessibilité Faites Mieux -->
+    <link rel="stylesheet" href="https://alixb-accessible.github.io/faites-mieux-toolbar/faites-mieux.css">
+    <script src="https://alixb-accessible.github.io/faites-mieux-toolbar/faites-mieux.js" defer></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial', sans-serif;
+            font-size: 24px;
+            background: linear-gradient(135deg, 
+                #4a4a4a 0%, #4a4a4a 14.28%,
+                #22c55e 14.28%, #22c55e 28.56%,
+                #3b82f6 28.56%, #3b82f6 42.84%,
+                #ffffff 42.84%, #ffffff 57.12%,
+                #fbbf24 57.12%, #fbbf24 71.4%,
+                #dc2626 71.4%, #dc2626 85.68%,
+                #4a4a4a 85.68%, #4a4a4a 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100%;
+        }
+        
+        html {
+            height: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-weight: 700;
+        }
+        
+        .header p {
+            margin: 15px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.4em;
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            padding: 40px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+        
+        .instructions h2 {
+            margin: 0 0 30px 0;
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 1.6em;
+            font-weight: 600;
+        }
+        
+        .step-number {
+            background: #1da1f2;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 25px;
+            flex-shrink: 0;
+            font-size: 1.2em;
+        }
+        
+        .step-text {
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .input-section {
+            margin-bottom: 40px;
+        }
+        
+        .input-section label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .textarea-container {
+            position: relative;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 20px;
+            border: 3px solid #e1e8ed;
+            border-radius: 15px;
+            font-size: 22px;
+            font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #1da1f2;
+            box-shadow: 0 0 0 4px rgba(29, 161, 242, 0.1);
+        }
+        
+        .char-counter {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #657786;
+            border: 2px solid #e1e8ed;
+        }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+            color: white;
+            border: none;
+            padding: 25px 45px;
+            border-radius: 30px;
+            font-size: 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(29, 161, 242, 0.3);
+            margin-right: 20px;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(29, 161, 242, 0.4);
+        }
+        
+        .generate-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .results {
+            margin-top: 40px;
+        }
+        
+        .results h3 {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .tweet-count {
+            background: #1da1f2;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 1.1em;
+        }
+        
+        .tweet-item {
+            background: #f8f9fa;
+            border: 2px solid #e1e8ed;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .tweet-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
+        }
+        
+        .tweet-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: #1da1f2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .tweet-text {
+            font-size: 22px;
+            line-height: 1.6;
+            color: #14171a;
+            margin-bottom: 20px;
+            padding-top: 15px;
+            font-weight: 500;
+        }
+        
+        .tweet-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            color: #657786;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .tweet-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-btn {
+            background: #17bf63;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #14a85f;
+            transform: scale(1.05);
+        }
+        
+        .copy-btn.copied {
+            background: #657786;
+        }
+        
+        .platform-btn {
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .platform-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .twitter-btn { background: #1da1f2; }
+        .twitter-btn:hover { background: #0d8bd9; }
+        .bluesky-btn { background: #00d4ff; }
+        .bluesky-btn:hover { background: #00b8e6; }
+        .linkedin-btn { background: #0077b5; }
+        .linkedin-btn:hover { background: #005885; }
+        .instagram-btn { background: #e4405f; }
+        .instagram-btn:hover { background: #d62d4a; }
+        .mastodon-btn { background: #6364ff; }
+        .mastodon-btn:hover { background: #5a5bff; }
+        
+        .copy-all-btn, .export-btn, .save-btn {
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 25px;
+            margin-right: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-all-btn {
+            background: #17bf63;
+        }
+        
+        .copy-all-btn:hover {
+            background: #14a85f;
+            transform: translateY(-1px);
+        }
+        
+        .export-btn {
+            background: #8b5cf6;
+        }
+        
+        .export-btn:hover {
+            background: #7c3aed;
+            transform: translateY(-1px);
+        }
+        
+        .save-btn {
+            background: #f59e0b;
+        }
+        
+        .save-btn:hover {
+            background: #d97706;
+            transform: translateY(-1px);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e1e8ed;
+            overflow-x: auto;
+            padding: 20px;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            border: none;
+            padding: 30px 40px;
+            font-size: 28px;
+            font-weight: 700;
+            cursor: pointer;
+            color: white;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: 200px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-family: 'Lexend', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .tab-btn:nth-child(1) {
+            background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
+        }
+        
+        .tab-btn:nth-child(2) {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+        
+        .tab-btn:nth-child(3) {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        }
+        
+        .tab-btn:nth-child(4) {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+        
+        .tab-btn:nth-child(5) {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+        
+        .tab-btn.active {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        
+        .tab-content {
+            display: block;
+        }
+        
+        .options-section {
+            background: #f8f9fa;
+            padding: 35px;
+            border-bottom: 1px solid #e1e8ed;
+            margin-bottom: 25px;
+        }
+        
+        .options-row {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option-group label {
+            font-weight: 600;
+            color: #333;
+            font-size: 22px;
+        }
+        
+        .option-group select,
+        .option-group input {
+            padding: 15px;
+            border: 3px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 20px;
+            background: white;
+            font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        .option-group input[type="number"] {
+            width: 150px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+        }
+        
+        .checkbox-group label {
+            font-size: 22px !important;
+        }
+        
+        .counter-display {
+            background: white;
+            border: 3px solid #e1e8ed;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .counter-number {
+            font-size: 4.5em;
+            font-weight: 700;
+            color: #1da1f2;
+            margin-bottom: 15px;
+        }
+        
+        .counter-number.warning {
+            color: #fbbf24;
+        }
+        
+        .counter-number.error {
+            color: #dc2626;
+        }
+        
+        .counter-label {
+            font-size: 1.6em;
+            color: #657786;
+            font-weight: 600;
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .template-card {
+            background: white;
+            border: 3px solid #e1e8ed;
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .template-card:hover {
+            border-color: #1da1f2;
+            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.1);
+        }
+        
+        .template-title {
+            font-weight: 700;
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .template-description {
+            color: #657786;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        
+        .template-preview {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1em;
+            color: #333;
+            font-style: italic;
+        }
+        
+        .history-section {
+            margin-bottom: 40px;
+        }
+        
+        .history-item {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .history-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .history-date {
+            font-size: 1em;
+            color: #657786;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .history-preview {
+            font-size: 1.1em;
+            color: #333;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .platform-preview {
+            background: white;
+            border: 3px solid #e1e8ed;
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .platform-preview h4 {
+            margin: 0 0 20px 0;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.4em;
+        }
+        
+        .platform-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        
+        .preview-post {
+            background: #f8f9fa;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            background: white;
+            color: #4a4a4a;
+            text-align: center;
+            padding: 25px;
+            font-size: 20px;
+            font-weight: 500;
+            border-top: 1px solid #e1e8ed;
+        }
+        
+        .auto-save-indicator {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: #17bf63;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .auto-save-indicator.show {
+            opacity: 1;
+        }
+        
+        .export-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .export-modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .export-modal h3 {
+            margin: 0 0 25px 0;
+            color: #333;
+            font-size: 1.8em;
+        }
+        
+        .export-textarea {
+            width: 100%;
+            height: 350px;
+            padding: 20px;
+            border: 3px solid #e1e8ed;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 18px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        
+        .export-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            justify-content: flex-end;
+        }
+        
+        .modal-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .modal-btn.primary {
+            background: #1da1f2;
+            color: white;
+        }
+        
+        .modal-btn.secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                font-size: 20px;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            .header {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .options-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .counter-number {
+                font-size: 3.5em;
+            }
+            
+            .tweet-text {
+                font-size: 20px;
+            }
+            
+            .step {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auto-save-indicator" id="autoSaveIndicator">Sauvegardé automatiquement</div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Suite Complète de Création de Contenu</h1>
+            <p>Créez vos contenus pour tous les réseaux sociaux<br>
+            Vérifiez la longueur de vos textes : exercices, articles, descriptions...</p>
+        </div>
+        
+        <div class="tabs" role="tablist">
+            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="thread-tab" onclick="switchTab('thread')">Générateur</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="templates-tab" onclick="switchTab('templates')">Templates</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="preview-tab" onclick="switchTab('preview')">Prévisualisation</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="counter-tab" onclick="switchTab('counter')">Compteur</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="history-tab" onclick="switchTab('history')">Historique</button>
+        </div>
+        
+        <!-- Onglet Générateur -->
+        <div class="tab-content" id="thread-tab" role="tabpanel">
+            <div class="instructions">
+                <h2>Mode d'emploi - Générateur de Thread</h2>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <span class="step-text">Choisissez votre plateforme ou utilisez un template</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <span class="step-text">Collez votre texte (sauvegarde automatique activée)</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <span class="step-text">Générez et publiez directement sur vos plateformes</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <span class="step-text">Exportez en fichier ou sauvegardez dans l'historique</span>
+                </div>
+            </div>
+            
+            <div class="options-section">
+                <div class="options-row">
+                    <div class="option-group">
+                        <label for="platformSelect">Plateforme :</label>
+                        <select id="platformSelect" onchange="updateCharLimit()">
+                            <option value="twitter">Twitter / X (280)</option>
+                            <option value="bluesky">Bluesky (300)</option>
+                            <option value="linkedin">LinkedIn (3000)</option>
+                            <option value="instagram">Instagram (2200)</option>
+                            <option value="mastodon">Mastodon (500)</option>
+                            <option value="custom">Personnalisé</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="charLimit">Caractères max :</label>
+                        <input type="number" id="charLimit" value="278" min="50" max="5000" onchange="updateSettings()">
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="numberingSelect">Numérotation :</label>
+                        <select id="numberingSelect" onchange="updateSettings()">
+                            <option value="start">Au début (1/ ...)</option>
+                            <option value="end">À la fin (... 1/3)</option>
+                            <option value="none">Aucune</option>
+                        </select>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="smartCut" checked onchange="updateSettings()">
+                        <label for="smartCut">Coupure intelligente</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="input-section">
+                    <label for="textInput">Votre texte à découper :</label>
+                    <div class="textarea-container">
+                        <textarea 
+                            id="textInput" 
+                            placeholder="Collez votre texte ici... Sauvegarde automatique activée !"
+                            aria-describedby="charCounter"
+                        ></textarea>
+                        <div class="char-counter" id="charCounter" aria-live="polite">0 caractères</div>
+                    </div>
+                </div>
+                
+                <button class="generate-btn" id="generateBtn" onclick="generateThread()">
+                    Générer le Thread
+                </button>
+                
+                <button class="generate-btn" onclick="optimizeThread()" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                    Optimiser Automatiquement
+                </button>
+                
+                <div class="results hidden" id="results">
+                    <h3>
+                        Votre thread est prêt ! 
+                        <span class="tweet-count" id="tweetCount">0 posts</span>
+                    </h3>
+                    
+                    <button class="copy-all-btn" onclick="copyAllTweets()">
+                        Copier tout
+                    </button>
+                    
+                    <button class="export-btn" onclick="showExportModal()">
+                        Exporter
+                    </button>
+                    
+                    <button class="save-btn" onclick="saveToHistory()">
+                        Sauvegarder
+                    </button>
+                    
+                    <div id="tweetsContainer"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Onglet Templates -->
+        <div class="tab-content hidden" id="templates-tab" role="tabpanel">
+            <div class="instructions">
+                <h2>Templates de Threads</h2>
+                <div class="step">
+                    <span class="step-number">T</span>
+                    <span class="step-text">Choisissez un template pour structurer votre contenu</span>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="templates-grid">
+                    <div class="template-card" onclick="useTemplate('tutorial')" tabindex="0" role="button">
+                        <div class="template-title">Tutoriel</div>
+                        <div class="template-description">Structure parfaite pour expliquer étape par étape</div>
+                        <div class="template-preview">1/ Introduction du problème<br>2/ Étape 1...<br>3/ Étape 2...</div>
+                    </div>
+                    
+                    <div class="template-card" onclick="useTemplate('story')" tabindex="0" role="button">
+                        <div class="template-title">Storytelling</div>
+                        <div class="template-description">Racontez une histoire captivante</div>
+                        <div class="template-preview">1/ Il était une fois...<br>2/ Le problème surgit...<br>3/ La résolution...</div>
+                    </div>
+                    
+                    <div class="template-card" onclick="useTemplate('tips')" tabindex="0" role="button">
+                        <div class="template-title">Conseils</div>
+                        <div class="template-description">Partagez vos meilleures astuces</div>
+                        <div class="template-preview">1/ Conseil #1 : ...<br>2/ Conseil #2 : ...<br>3/ Bonus : ...</div>
+                    </div>
+                    
+                    <div class="template-card" onclick="useTemplate('experience')" tabindex="0" role="button">
+<div class="template-title">Retour d'expérience</div>
+                    <div class="template-description">Partagez votre vécu et vos apprentissages</div>
+                    <div class="template-preview">1/ Le contexte...<br>2/ Ce que j'ai appris...<br>3/ Mes recommandations...</div>
+                </div>
+                
+                <div class="template-card" onclick="useTemplate('debate')" tabindex="0" role="button">
+                    <div class="template-title">Débat/Opinion</div>
+                    <div class="template-description">Exposez votre point de vue argumenté</div>
+                    <div class="template-preview">1/ Le sujet qui divise...<br>2/ Mon point de vue...<br>3/ Pourquoi je pense ça...</div>
+                </div>
+                
+                <div class="template-card" onclick="useTemplate('list')" tabindex="0" role="button">
+                    <div class="template-title">Liste/Top</div>
+                    <div class="template-description">Créez des listes engageantes</div>
+                    <div class="template-preview">1/ Top 5 des...<br>2/ #1 : ...<br>3/ #2 : ...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Onglet Prévisualisation -->
+    <div class="tab-content hidden" id="preview-tab" role="tabpanel">
+        <div class="instructions">
+            <h2>Prévisualisation Multi-Plateformes</h2>
+            <div class="step">
+                <span class="step-number">P</span>
+                <span class="step-text">Voyez comment vos posts apparaîtront sur chaque plateforme</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="preview-container" id="previewContainer">
+                <div class="platform-preview">
+                    <h4>
+                        <div class="platform-icon" style="background: #1da1f2;"></div>
+                        Twitter / X
+                    </h4>
+                    <div id="twitterPreview">Générez d'abord votre thread pour voir la prévisualisation</div>
+                </div>
+                
+                <div class="platform-preview">
+                    <h4>
+                        <div class="platform-icon" style="background: #00d4ff;"></div>
+                        Bluesky
+                    </h4>
+                    <div id="blueskyPreview">Générez d'abord votre thread pour voir la prévisualisation</div>
+                </div>
+                
+                <div class="platform-preview">
+                    <h4>
+                        <div class="platform-icon" style="background: #0077b5;"></div>
+                        LinkedIn
+                    </h4>
+                    <div id="linkedinPreview">Générez d'abord votre thread pour voir la prévisualisation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Onglet Compteur -->
+    <div class="tab-content hidden" id="counter-tab" role="tabpanel">
+        <div class="instructions">
+            <h2>Compteur de Caractères</h2>
+            <div class="step">
+                <span class="step-number">1</span>
+                <span class="step-text">Définissez votre limite de caractères</span>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <span class="step-text">Tapez votre texte et surveillez le compteur</span>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <span class="step-text">Optimisez selon les couleurs d'alerte</span>
+            </div>
+        </div>
+        
+        <div class="options-section">
+            <div class="options-row">
+                <div class="option-group">
+                    <label for="counterLimit">Limite de caractères :</label>
+                    <select id="counterLimit" onchange="updateCounterLimit()">
+                        <option value="280">Twitter / X (280)</option>
+                        <option value="300">Bluesky (300)</option>
+                        <option value="500">Mastodon (500)</option>
+                        <option value="1000">Description courte (1000)</option>
+                        <option value="2000">Article moyen (2000)</option>
+                        <option value="5000">Article long (5000)</option>
+                        <option value="custom">Personnalisé</option>
+                    </select>
+                </div>
+                
+                <div class="option-group" id="customCounterGroup" style="display: none;">
+                    <label for="customCounterLimit">Limite personnalisée :</label>
+                    <input type="number" id="customCounterLimit" value="280" min="1" max="50000" onchange="updateCounterLimit()">
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="counter-display">
+                <div class="counter-number" id="counterNumber" aria-live="polite">0</div>
+                <div class="counter-label" id="counterLabel">caractères sur 280</div>
+            </div>
+            
+            <div class="input-section">
+                <label for="counterTextInput">Votre texte :</label>
+                <div class="textarea-container">
+                    <textarea 
+                        id="counterTextInput" 
+                        placeholder="Tapez ou collez votre texte ici pour compter les caractères en temps réel..."
+                        aria-describedby="counterNumber counterLabel"
+                    ></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Onglet Historique -->
+    <div class="tab-content hidden" id="history-tab" role="tabpanel">
+        <div class="instructions">
+            <h2>Historique de vos Créations</h2>
+            <div class="step">
+                <span class="step-number">H</span>
+                <span class="step-text">Retrouvez et réutilisez vos anciens threads</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="history-section">
+                <button class="copy-all-btn" onclick="clearHistory()" style="background: #dc2626;">
+                    Vider l'historique
+                </button>
+                <div id="historyContainer">
+                    <p style="color: #657786; text-align: center; padding: 40px;">Aucun thread sauvegardé pour le moment</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        TiRacoon - Pour un monde virtuel plus accessible
+    </div>
+</div>
+
+<!-- Modal d'export -->
+<div class="export-modal hidden" id="exportModal" role="dialog" aria-labelledby="exportModalTitle" aria-modal="true">
+    <div class="export-modal-content">
+        <h3 id="exportModalTitle">Exporter votre thread</h3>
+        <p>Copiez le contenu ci-dessous ou sélectionnez tout (Ctrl+A) puis copiez (Ctrl+C) :</p>
+        <textarea class="export-textarea" id="exportTextarea" readonly aria-label="Contenu à exporter"></textarea>
+        <div class="export-actions">
+            <button class="modal-btn primary" onclick="copyExportContent()">Copier tout</button>
+            <button class="modal-btn secondary" onclick="closeExportModal()">Fermer</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Fonction sécurisée pour échapper le HTML
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // Variables globales
+    const textInput = document.getElementById('textInput');
+    const charCounter = document.getElementById('charCounter');
+    const generateBtn = document.getElementById('generateBtn');
+    const results = document.getElementById('results');
+    const tweetsContainer = document.getElementById('tweetsContainer');
+    const tweetCount = document.getElementById('tweetCount');
+    const platformSelect = document.getElementById('platformSelect');
+    const charLimitInput = document.getElementById('charLimit');
+    const numberingSelect = document.getElementById('numberingSelect');
+    const smartCutCheckbox = document.getElementById('smartCut');
+    
+    // Variables pour le compteur
+    const counterTextInput = document.getElementById('counterTextInput');
+    const counterNumber = document.getElementById('counterNumber');
+    const counterLabel = document.getElementById('counterLabel');
+    const counterLimit = document.getElementById('counterLimit');
+    const customCounterLimit = document.getElementById('customCounterLimit');
+    const customCounterGroup = document.getElementById('customCounterGroup');
+    
+    // Variables pour l'historique et la sauvegarde
+    const autoSaveIndicator = document.getElementById('autoSaveIndicator');
+    const historyContainer = document.getElementById('historyContainer');
+    
+    // Variables pour l'export
+    const exportModal = document.getElementById('exportModal');
+    const exportTextarea = document.getElementById('exportTextarea');
+    
+    let generatedTweets = [];
+    let currentCharLimit = 278;
+    let numberingMode = 'start';
+    let shouldSmartCut = true;
+    let currentCounterLimit = 280;
+    let autoSaveTimeout;
+    let counterUpdateTimeout;
+    
+    // Configuration des plateformes
+    const platforms = {
+        twitter: { limit: 280, name: 'Twitter / X', color: '#1da1f2', url: 'https://twitter.com/intent/tweet?text=' },
+        bluesky: { limit: 300, name: 'Bluesky', color: '#00d4ff', url: 'https://bsky.app/intent/compose?text=' },
+        linkedin: { limit: 3000, name: 'LinkedIn', color: '#0077b5', url: 'https://www.linkedin.com/sharing/share-offsite/?url=' },
+        instagram: { limit: 2200, name: 'Instagram', color: '#e4405f', url: null },
+        mastodon: { limit: 500, name: 'Mastodon', color: '#6364ff', url: null }
+    };
+    
+    // Templates prédéfinis (sans emojis)
+    const templates = {
+        tutorial: {
+            title: "Tutoriel étape par étape",
+            content: `TUTORIEL : [Titre de votre tutoriel]
+Aujourd'hui, je vais vous expliquer comment [objectif du tutoriel] en [nombre] étapes simples.
+Étape 1 : [Première étape] [Explication détaillée]
+Étape 2 : [Deuxième étape]
+ [Explication détaillée]
+Étape 3 : [Troisième étape] [Explication détaillée]
+Conseil bonus : [Astuce supplémentaire]
+Vous avez des questions ? N'hésitez pas à les poser en commentaire ! }, story: { title: "Storytelling captivant", content:HISTOIRE : [Titre de votre histoire]
+Il y a [période], j'ai vécu une expérience qui a changé ma vision de [sujet].
+Le contexte : [Décrivez la situation initiale]
+Le problème : [Décrivez le défi ou l'obstacle rencontré]
+La révélation : [Décrivez le moment clé, la prise de conscience]
+Le résultat : [Décrivez les conséquences positives]
+Ce que j'en retiens : [Leçons apprises et conseils] }, tips: { title: "Conseils pratiques", content:MES [NOMBRE] CONSEILS POUR [SUJET]
+Après [expérience/temps], voici ce que j'ai appris :
+[Premier conseil] [Explication courte]
+[Deuxième conseil] [Explication courte]
+[Troisième conseil] [Explication courte]
+[Quatrième conseil] [Explication courte]
+[Cinquième conseil] [Explication courte]
+BONUS : [Conseil supplémentaire]
+Lequel vous parle le plus ? }, experience: { title: "Retour d'expérience", content:RETOUR D'EXPÉRIENCE : [Titre]
+Je voulais partager avec vous mon expérience de [sujet/projet].
+Le contexte : [Situation de départ]
+Mes objectifs : [Ce que vous vouliez accomplir]
+Les défis rencontrés : [Difficultés principales]
+Comment je les ai surmontés : [Solutions trouvées]
+Les résultats : [Ce qui a été accompli]
+Mes apprentissages : [Leçons tirées]
+Et vous, avez-vous vécu une expérience similaire ? }, debate: { title: "Opinion argumentée", content:MON AVIS SUR [SUJET CONTROVERSÉ]
+Ce sujet divise, mais voici pourquoi je pense que [votre position].
+Les faits : [Données objectives]
+Mon point de vue : [Votre opinion principale]
+Mes arguments :
+[Premier argument] [Développement]
+[Deuxième argument] [Développement]
+[Troisième argument] [Développement]
+Je comprends les autres points de vue, mais... [Nuance et respect des autres opinions]
+Qu'en pensez-vous ? Débattons respectueusement ! }, list: { title: "Top/Liste engageante", content:TOP [NOMBRE] DES [SUJET]
+Voici ma sélection personnelle après [expérience/recherche] :
+#1 : [Premier élément] [Pourquoi c'est le meilleur]
+#2 : [Deuxième élément] [Explication]
+#3 : [Troisième élément] [Explication]
+[Quatrième élément] [Explication]
+[Cinquième élément] [Explication]
+Êtes-vous d'accord avec ce classement ? Qu'est-ce qui manque selon vous ?` } };
+   // Gestion des onglets
+    function switchTab(tabName) {
+        // Masquer tous les contenus
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.add('hidden');
+        });
+        
+        // Désactiver tous les boutons d'onglet
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+        });
+        
+        // Afficher le contenu sélectionné
+        const targetTab = document.getElementById(`${tabName}-tab`);
+        if (targetTab) {
+            targetTab.classList.remove('hidden');
+        }
+        
+        // Activer le bon bouton d'onglet
+        const activeBtn = document.querySelector(`button[onclick="switchTab('${tabName}')"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+            activeBtn.setAttribute('aria-selected', 'true');
+        }
+    }
+    
+    // Sauvegarde automatique avec gestion d'erreur
+    function autoSave() {
+        const content = textInput.value;
+        if (content.trim()) {
+            try {
+                localStorage.setItem('autoSave', JSON.stringify({
+                    content: content,
+                    timestamp: Date.now(),
+                    platform: platformSelect.value,
+                    charLimit: charLimitInput.value,
+                    numbering: numberingSelect.value,
+                    smartCut: smartCutCheckbox.checked
+                }));
+                
+                showAutoSaveIndicator();
+            } catch (e) {
+                console.error('Erreur de sauvegarde:', e);
+            }
+        }
+    }
+    
+    function showAutoSaveIndicator() {
+        autoSaveIndicator.classList.add('show');
+        setTimeout(() => {
+            autoSaveIndicator.classList.remove('show');
+        }, 2000);
+    }
+    
+    function loadAutoSave() {
+        try {
+            const saved = localStorage.getItem('autoSave');
+            if (saved) {
+                const data = JSON.parse(saved);
+                textInput.value = data.content;
+                platformSelect.value = data.platform || 'twitter';
+                charLimitInput.value = data.charLimit || 278;
+                numberingSelect.value = data.numbering || 'start';
+                smartCutCheckbox.checked = data.smartCut !== false;
+                updateCharLimit();
+                updateCharCounter();
+            }
+        } catch (e) {
+            console.error('Erreur de chargement:', e);
+        }
+    }
+    
+    // Templates
+    function useTemplate(templateKey) {
+        const template = templates[templateKey];
+        if (template) {
+            const existingText = textInput.value.trim();
+            
+            if (existingText) {
+                // Créer une confirmation personnalisée
+                const templatesTab = document.getElementById('templates-tab');
+                const originalContent = templatesTab.innerHTML;
+                
+                templatesTab.innerHTML = `
+                    <div class="instructions">
+                        <h2>Confirmation</h2>
+                        <div class="step">
+                            <span class="step-number">?</span>
+                            <span class="step-text">Vous avez déjà du texte. Que voulez-vous faire ?</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div style="background: #fff3cd; border: 3px solid #ffeaa7; border-radius: 15px; padding: 30px; margin-bottom: 30px;">
+                            <h3 style="color: #856404; margin-bottom: 20px; font-size: 1.8em;">Texte existant détecté</h3>
+                            <p style="color: #856404; margin-bottom: 25px; font-size: 1.4em;">Vous avez déjà du texte dans le générateur. Comment souhaitez-vous utiliser ce template ?</p>
+                            <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                                <button onclick="replaceWithTemplate('${templateKey}')" style="background: #dc2626; color: white; border: none; padding: 18px 30px; border-radius: 12px; font-size: 20px; font-weight: 600; cursor: pointer;">Remplacer le texte</button>
+                                <button onclick="addTemplate('${templateKey}')" style="background: #17bf63; color: white; border: none; padding: 18px 30px; border-radius: 12px; font-size: 20px; font-weight: 600; cursor: pointer;">Ajouter à la fin</button>
+                                <button onclick="cancelTemplate()" style="background: #6b7280; color: white; border: none; padding: 18px 30px; border-radius: 12px; font-size: 20px; font-weight: 600; cursor: pointer;">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Pas de texte existant, utiliser directement le template
+                textInput.value = template.content;
+                updateCharCounter();
+                autoSave();
+                switchTab('thread');
+            }
+        }
+    }
+    
+    function replaceWithTemplate(templateKey) {
+        const template = templates[templateKey];
+        if (template) {
+            textInput.value = template.content;
+            updateCharCounter();
+            autoSave();
+            switchTab('thread');
+        }
+    }
+    
+    function addTemplate(templateKey) {
+        const template = templates[templateKey];
+        if (template) {
+            const existingText = textInput.value.trim();
+            textInput.value = existingText + '\n\n' + template.content;
+            updateCharCounter();
+            autoSave();
+            switchTab('thread');
+        }
+    }
+    
+    function cancelTemplate() {
+        switchTab('templates');
+        loadTemplatesView();
+    }
+    
+    function loadTemplatesView() {
+        const templatesTab = document.getElementById('templates-tab');
+        const content = templatesTab.querySelector('.content');
+        if (!content) return;
+        
+        content.innerHTML = `
+            <div class="templates-grid">
+                ${Object.entries(templates).map(([key, template]) => `
+                    <div class="template-card" onclick="useTemplate('${key}')" tabindex="0" role="button">
+                        <div class="template-title">${escapeHtml(template.title)}</div>
+                        <div class="template-description">${escapeHtml(template.content.substring(0, 100))}...</div>
+                        <div class="template-preview">${escapeHtml(template.content.split('\n').slice(0, 3).join('\n'))}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+    
+    // Mise à jour des limites de caractères selon la plateforme
+    function updateCharLimit() {
+        const platform = platformSelect.value;
+        if (platforms[platform]) {
+            const numberingSpace = numberingMode !== 'none' ? 5 : 0;
+            charLimitInput.value = platforms[platform].limit - numberingSpace;
+            currentCharLimit = platforms[platform].limit - numberingSpace;
+        }
+        charLimitInput.disabled = platform !== 'custom';
+        updateSettings();
+    }
+    
+    // Mise à jour des paramètres
+    function updateSettings() {
+        currentCharLimit = parseInt(charLimitInput.value);
+        numberingMode = numberingSelect.value;
+        shouldSmartCut = smartCutCheckbox.checked;
+        
+        if (numberingMode !== 'none' && platformSelect.value !== 'custom') {
+            currentCharLimit = parseInt(charLimitInput.value) - 5;
+        } else {
+            currentCharLimit = parseInt(charLimitInput.value);
+        }
+    }
+    
+    // Gestion du compteur de caractères
+    function updateCounterLimit() {
+        const limit = counterLimit.value;
+        if (limit === 'custom') {
+            customCounterGroup.style.display = 'block';
+            currentCounterLimit = parseInt(customCounterLimit.value);
+        } else {
+            customCounterGroup.style.display = 'none';
+            currentCounterLimit = parseInt(limit);
+        }
+        updateCounterDisplay();
+    }
+    
+    function updateCounterDisplay() {
+        clearTimeout(counterUpdateTimeout);
+        counterUpdateTimeout = setTimeout(() => {
+            const length = counterTextInput.value.length;
+            counterNumber.textContent = length;
+            counterLabel.textContent = `caractères sur ${currentCounterLimit}`;
+            
+            counterNumber.className = 'counter-number';
+            if (length > currentCounterLimit) {
+                counterNumber.classList.add('error');
+            } else if (length > currentCounterLimit * 0.9) {
+                counterNumber.classList.add('warning');
+            }
+        }, 50);
+    }
+    
+    function updateCharCounter() {
+        const length = textInput.value.length;
+        charCounter.textContent = `${length} caractères`;
+        generateBtn.disabled = length === 0;
+    }
+    
+    // Coupure intelligente
+    function smartSplit(text, maxLength) {
+        if (text.length <= maxLength) return [text];
+        
+        const sentences = text.split(/(?<=[.!?])\s+/);
+        const chunks = [];
+        let currentChunk = '';
+        
+        for (const sentence of sentences) {
+            const testChunk = currentChunk ? `${currentChunk} ${sentence}` : sentence;
+            
+            if (testChunk.length <= maxLength) {
+                currentChunk = testChunk;
+            } else {
+                if (currentChunk) {
+                    chunks.push(currentChunk);
+                    currentChunk = sentence;
+                }
+                
+                // Si une phrase est trop longue, la couper aux virgules ou espaces
+                while (currentChunk.length > maxLength) {
+                    let cutPoint = maxLength;
+                    const commaIndex = currentChunk.lastIndexOf(',', maxLength - 10);
+                    const spaceIndex = currentChunk.lastIndexOf(' ', maxLength - 10);
+                    
+                    if (commaIndex > maxLength * 0.7) {
+                        cutPoint = commaIndex + 1;
+                    } else if (spaceIndex > maxLength * 0.7) {
+                        cutPoint = spaceIndex;
+                    }
+                    
+                    chunks.push(currentChunk.substring(0, cutPoint).trim());
+                    currentChunk = currentChunk.substring(cutPoint).trim();
+                }
+            }
+        }
+        
+        if (currentChunk) {
+            chunks.push(currentChunk);
+        }
+        
+        return chunks;
+    }
+    
+    // Génération du thread
+    function generateThread() {
+        const text = textInput.value.trim();
+        if (!text) return;
+        
+        let chunks;
+        if (shouldSmartCut) {
+            chunks = smartSplit(text, currentCharLimit);
+        } else {
+            // Méthode simple par phrases
+            const sentences = text.split(/(?<=[.!?])\s+/).filter(s => s.trim());
+            chunks = [];
+            let currentChunk = '';
+            
+            for (const sentence of sentences) {
+                const testChunk = currentChunk ? `${currentChunk} ${sentence}` : sentence;
+                
+                if (testChunk.length <= currentCharLimit) {
+                    currentChunk = testChunk;
+                } else {
+                    if (currentChunk) chunks.push(currentChunk);
+                    currentChunk = sentence;
+                    
+                    while (currentChunk.length > currentCharLimit) {
+                        const cutText = currentChunk.substring(0, currentCharLimit - 3) + '...';
+                        chunks.push(cutText);
+                        currentChunk = '...' + currentChunk.substring(currentCharLimit - 3);
+                    }
+                }
+            }
+            
+            if (currentChunk) chunks.push(currentChunk);
+        }
+        
+        const tweets = chunks.map((chunk, index) => {
+            const number = index + 1;
+            const total = chunks.length;
+            let finalText = chunk;
+            
+            if (numberingMode === 'start') {
+                finalText = `${number}/ ${chunk}`;
+            } else if (numberingMode === 'end') {
+                finalText = `${chunk} ${number}/${total}`;
+            }
+            
+            return {
+                number: number,
+                text: finalText,
+                length: finalText.length
+            };
+        });
+        
+        generatedTweets = tweets;
+        displayTweets(tweets);
+        updatePreview(tweets);
+    }
+    
+    // Optimisation automatique (sans emojis)
+    function optimizeThread() {
+        const text = textInput.value.trim();
+        if (!text) return;
+        
+        // Analyse du texte pour suggérer des améliorations
+        let optimizedText = text;
+        
+        // Nettoyer d'abord toute numérotation existante
+        optimizedText = optimizedText.replace(/^\d+\/\s*/gm, '');
+        
+        // Améliorer la ponctuation et les espaces (sans ajouter d'emojis)
+        optimizedText = optimizedText
+            .replace(/\s+/g, ' ') // Normaliser les espaces
+            .replace(/([.!?])\s*([A-Z])/g, '$1 $2') // Espaces après ponctuation
+            .trim();
+        
+        textInput.value = optimizedText;
+        generateThread();
+    }
+    
+    // Affichage des tweets avec échappement HTML
+    function displayTweets(tweets) {
+        tweetsContainer.innerHTML = '';
+        const platform = platformSelect.value;
+        const platformData = platforms[platform] || { name: 'Post' };
+        
+        tweetCount.textContent = `${tweets.length} post${tweets.length > 1 ? 's' : ''}`;
+        
+        tweets.forEach((tweet, index) => {
+            const tweetDiv = document.createElement('div');
+            tweetDiv.className = 'tweet-item';
+            
+            const tweetNumber = document.createElement('div');
+            tweetNumber.className = 'tweet-number';
+            tweetNumber.textContent = `Post ${tweet.number}`;
+            
+            const tweetText = document.createElement('div');
+            tweetText.className = 'tweet-text';
+            tweetText.textContent = tweet.text;
+            
+            const tweetMeta = document.createElement('div');
+            tweetMeta.className = 'tweet-meta';
+            
+            const charInfo = document.createElement('span');
+            charInfo.textContent = `${tweet.length}/${charLimitInput.value} caractères`;
+            
+            const tweetActions = document.createElement('div');
+            tweetActions.className = 'tweet-actions';
+            
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'copy-btn';
+            copyBtn.textContent = 'Copier';
+            copyBtn.setAttribute('aria-label', `Copier le post ${tweet.number}`);
+            copyBtn.addEventListener('click', () => copyTweet(index));
+            
+            tweetActions.appendChild(copyBtn);
+            
+            // Ajouter les boutons de plateforme
+            Object.entries(platforms).forEach(([key, platform]) => {
+                if (platform.url) {
+                    const btn = document.createElement('button');
+                    btn.className = `platform-btn ${key}-btn`;
+                    btn.textContent = platform.name;
+                    btn.setAttribute('aria-label', `Partager sur ${platform.name}`);
+                    btn.addEventListener('click', () => openPlatform(key, index));
+                    tweetActions.appendChild(btn);
+                }
+            });
+            
+            tweetMeta.appendChild(charInfo);
+            tweetMeta.appendChild(tweetActions);
+            
+            tweetDiv.appendChild(tweetNumber);
+            tweetDiv.appendChild(tweetText);
+            tweetDiv.appendChild(tweetMeta);
+            
+            tweetsContainer.appendChild(tweetDiv);
+        });
+        
+        results.classList.remove('hidden');
+        results.setAttribute('aria-live', 'polite');
+    }
+    
+    // Mise à jour de la prévisualisation avec échappement HTML
+    function updatePreview(tweets) {
+        const twitterPreview = document.getElementById('twitterPreview');
+        const blueskyPreview = document.getElementById('blueskyPreview');
+        const linkedinPreview = document.getElementById('linkedinPreview');
+        
+        if (tweets
+&& tweets.length > 0) { const previews = tweets.map(tweet => { const div = document.createElement('div'); div.className = 'preview-post'; div.textContent = tweet.text; return div.outerHTML; }).join('');
+           twitterPreview.innerHTML = previews;
+            blueskyPreview.innerHTML = previews;
+            linkedinPreview.innerHTML = previews;
+        }
+    }
+    
+    // Système de notifications unifié
+    function showNotification(message, isError = false) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 25px;
+            background: ${isError ? '#dc2626' : '#17bf63'};
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+        `;
+        notification.textContent = message;
+        notification.setAttribute('role', 'alert');
+        notification.setAttribute('aria-live', 'polite');
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 2500);
+    }
+    
+    // Fonctions de copie et partage avec meilleure gestion
+    function copyTweet(index) {
+        const tweet = generatedTweets[index];
+        navigator.clipboard.writeText(tweet.text).then(() => {
+            showNotification('Post copié !');
+        }).catch(err => {
+            console.error('Erreur de copie:', err);
+            showNotification('Erreur lors de la copie', true);
+        });
+    }
+    
+    function copyAllTweets() {
+        const allTweets = generatedTweets.map(tweet => tweet.text).join('\n\n');
+        navigator.clipboard.writeText(allTweets).then(() => {
+            showNotification('Thread complet copié !');
+        }).catch(err => {
+            console.error('Erreur de copie:', err);
+            showNotification('Erreur lors de la copie', true);
+        });
+    }
+    
+    function openPlatform(platformKey, index) {
+        const tweet = generatedTweets[index];
+        const platform = platforms[platformKey];
+        
+        if (platform && platform.url) {
+            const tweetText = encodeURIComponent(tweet.text);
+            const url = platform.url + tweetText;
+            window.open(url, '_blank', 'noopener,noreferrer');
+        } else {
+            // Fallback: copier le texte
+            copyTweet(index);
+        }
+    }
+    
+    // Export amélioré
+    function showExportModal() {
+        if (generatedTweets.length === 0) {
+            showNotification('Veuillez d\'abord générer un thread', true);
+            return;
+        }
+        
+        const content = generatedTweets.map((tweet, index) => 
+            `Post ${index + 1}:\n${tweet.text}\n(${tweet.length} caractères)\n`
+        ).join('\n');
+        
+        exportTextarea.value = content;
+        exportModal.classList.remove('hidden');
+        exportModal.setAttribute('aria-hidden', 'false');
+        
+        // Focus sur la textarea
+        setTimeout(() => exportTextarea.focus(), 100);
+    }
+    
+    function closeExportModal() {
+        exportModal.classList.add('hidden');
+        exportModal.setAttribute('aria-hidden', 'true');
+    }
+    
+    function copyExportContent() {
+        exportTextarea.select();
+        navigator.clipboard.writeText(exportTextarea.value).then(() => {
+            showNotification('Contenu exporté copié !');
+            setTimeout(closeExportModal, 1000);
+        }).catch(err => {
+            console.error('Erreur de copie:', err);
+            showNotification('Erreur lors de la copie', true);
+        });
+    }
+    
+    function saveToHistory() {
+        if (generatedTweets.length === 0) {
+            showNotification('Veuillez d\'abord générer un thread', true);
+            return;
+        }
+        
+        try {
+            const historyItem = {
+                id: Date.now(),
+                date: new Date().toLocaleString('fr-FR'),
+                platform: platformSelect.value,
+                tweets: generatedTweets,
+                originalText: textInput.value,
+                preview: textInput.value.substring(0, 100) + (textInput.value.length > 100 ? '...' : '')
+            };
+            
+            const history = JSON.parse(localStorage.getItem('threadHistory') || '[]');
+            history.unshift(historyItem);
+            
+            // Garder seulement les 20 derniers
+            if (history.length > 20) {
+                history.splice(20);
+            }
+            
+            localStorage.setItem('threadHistory', JSON.stringify(history));
+            loadHistory();
+            
+            showNotification('Thread sauvegardé dans l\'historique !');
+        } catch (e) {
+            console.error('Erreur de sauvegarde:', e);
+            showNotification('Erreur lors de la sauvegarde', true);
+        }
+    }
+    
+    // Gestion de l'historique avec échappement HTML
+    function loadHistory() {
+        try {
+            const history = JSON.parse(localStorage.getItem('threadHistory') || '[]');
+            
+            if (history.length === 0) {
+                historyContainer.innerHTML = '<p style="color: #657786; text-align: center; padding: 40px;">Aucun thread sauvegardé pour le moment</p>';
+                return;
+            }
+            
+            historyContainer.innerHTML = '';
+            history.forEach(item => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.setAttribute('tabindex', '0');
+                historyItem.setAttribute('role', 'button');
+                historyItem.setAttribute('aria-label', `Thread du ${item.date}`);
+                
+                const historyDate = document.createElement('div');
+                historyDate.className = 'history-date';
+                historyDate.textContent = `${item.date} - ${platforms[item.platform]?.name || item.platform}`;
+                
+                const historyPreview = document.createElement('div');
+                historyPreview.className = 'history-preview';
+                historyPreview.textContent = item.preview;
+                
+                historyItem.appendChild(historyDate);
+                historyItem.appendChild(historyPreview);
+                
+                historyItem.addEventListener('click', () => loadFromHistory(item.id));
+                historyItem.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        loadFromHistory(item.id);
+                    }
+                });
+                
+                historyContainer.appendChild(historyItem);
+            });
+        } catch (e) {
+            console.error('Erreur de chargement de l\'historique:', e);
+            historyContainer.innerHTML = '<p style="color: #dc2626; text-align: center; padding: 40px;">Erreur lors du chargement de l\'historique</p>';
+        }
+    }
+    
+    function loadFromHistory(id) {
+        try {
+            const history = JSON.parse(localStorage.getItem('threadHistory') || '[]');
+            const item = history.find(h => h.id === id);
+            
+            if (item) {
+                textInput.value = item.originalText;
+                platformSelect.value = item.platform;
+                updateCharLimit();
+                generateThread();
+                switchTab('thread');
+                showNotification('Thread chargé depuis l\'historique');
+            }
+        } catch (e) {
+            console.error('Erreur de chargement:', e);
+            showNotification('Erreur lors du chargement', true);
+        }
+    }
+    
+    function clearHistory() {
+        // Créer une confirmation personnalisée
+        const historyContainer = document.getElementById('historyContainer');
+        historyContainer.innerHTML = `
+            <div style="text-align: center; padding: 40px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 12px; margin: 20px 0;">
+                <h3 style="color: #856404; margin-bottom: 20px;">Confirmation</h3>
+                <p style="color: #856404; margin-bottom: 20px;">Êtes-vous sûr de vouloir vider l'historique ?<br>Cette action est irréversible.</p>
+                <button onclick="confirmClearHistory()" style="background: #dc2626; color: white; border: none; padding: 12px 25px; border-radius: 8px; margin-right: 10px; cursor: pointer;">Oui, vider</button>
+                <button onclick="loadHistory()" style="background: #6b7280; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer;">Annuler</button>
+            </div>
+        `;
+    }
+    
+    function confirmClearHistory() {
+        try {
+            localStorage.removeItem('threadHistory');
+            loadHistory();
+            showNotification('Historique vidé');
+        } catch (e) {
+            console.error('Erreur:', e);
+            showNotification('Erreur lors de la suppression', true);
+        }
+    }
+    
+    // Fermer la modal avec la touche Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !exportModal.classList.contains('hidden')) {
+            closeExportModal();
+        }
+    });
+    
+    // Fermer la modal en cliquant à l'extérieur
+    exportModal.addEventListener('click', function(e) {
+        if (e.target === exportModal) {
+            closeExportModal();
+        }
+    });
+    
+    // Event listeners
+    textInput.addEventListener('input', function() {
+        updateCharCounter();
+        
+        clearTimeout(autoSaveTimeout);
+        autoSaveTimeout = setTimeout(autoSave, 1000);
+    });
+    
+    counterTextInput.addEventListener('input', updateCounterDisplay);
+    
+    // Initialisation
+    generateBtn.disabled = true;
+    updateSettings();
+    updateCounterDisplay();
+    loadAutoSave();
+    loadHistory();
+    exportModal.setAttribute('aria-hidden', 'true');
+</script>
+</body> </html> 
